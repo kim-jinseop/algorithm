@@ -17,7 +17,7 @@ for i in range(len(move)) :
     dx = xp + move[i][0]
     dy = yp + move[i][1]
 
-    if(dx>=1 or dx<=8 or dy>=1 or dy<=8) :
+    if(dx>=1 and dx<=8 and dy>=1 and dy<=8) :
         result += 1
                 
 print(result)
