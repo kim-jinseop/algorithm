@@ -3,8 +3,12 @@
 number = int(input())
 
 student = []
-for _ in range(number) :
+for i in range(number) :
     input_data = input().split()
-    student.append(input_data[0],int(input_data[1]))
+    student.append((input_data[0], int(input_data[1])))
     
     
+student = sorted(student, key= lambda x: x[1])
+
+for result in student :
+    print(result[0], end=' ')
