@@ -12,8 +12,18 @@ distance = [INF] * (n+1)            #최단거리 (무한대로 초기화)
 for _ in range(m) :
     a,b,c = map(int,input().split()) #a번 노드에서 b번 노드로 가는 비용이 c라는 의미
     array[a].append((b,c))
+
     
-    
+def MIN() :
+    min = INF
+    index = 0
+    for i in (1,n+1) :
+        if not visited[i] and min > distance[i] :
+            min = distance[i]
+            index = i
+    return index    
+
+
 def dijkstra (start) :
     visited[start] = True
     distance[start] = 0
@@ -21,10 +31,22 @@ def dijkstra (start) :
     for i in array[start] : #출발노드에서 도착노드의 비용 
         distance[i[0]] = i[1]
         
-    for i in array[n-1] :
+    for i in range(n-1) :
         min = MIN()
+        visited[min] = True
 
-def MIN() :
-    min = INF
-    for i in (1,n+1) :
-        
+        for j in array[min] : #출발노드에서 도착노드의 비용
+            cost = distance[min] + j[i]
+
+            if cost < distance[j[0]] :
+                distance[j[0]] = cost
+
+
+dijkstra(start)
+
+for i in range(1, n+1) :
+    if distance[i] == INF :
+        print("INF")
+    else :
+        print(distance[i])
+
