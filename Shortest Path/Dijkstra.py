@@ -14,17 +14,17 @@ for _ in range(m) :
     array[a].append((b,c))
 
     
-def MIN() :
+def MINF() :
     min = INF
     index = 0
-    for i in (1,n+1) :
-        if not visited[i] and min > distance[i] :
+    for i in range(1,n+1) :
+        if distance[i] < min and not visited[i]:
             min = distance[i]
             index = i
     return index    
 
 
-def dijkstra (start) :
+def dijkstra(start) :
     visited[start] = True
     distance[start] = 0
     
@@ -32,11 +32,11 @@ def dijkstra (start) :
         distance[i[0]] = i[1]
         
     for i in range(n-1) :
-        min = MIN()
-        visited[min] = True
+        now = MINF()
+        visited[now] = True
 
-        for j in array[min] : #출발노드에서 도착노드의 비용
-            cost = distance[min] + j[i]
+        for j in array[now] : #출발노드에서 도착노드의 비용
+            cost = distance[now] + j[1]
 
             if cost < distance[j[0]] :
                 distance[j[0]] = cost
@@ -44,9 +44,9 @@ def dijkstra (start) :
 
 dijkstra(start)
 
+
 for i in range(1, n+1) :
     if distance[i] == INF :
         print("INF")
-    else :
+    else : 
         print(distance[i])
-
