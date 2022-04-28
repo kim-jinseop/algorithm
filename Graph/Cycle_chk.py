@@ -5,7 +5,7 @@
 def find_parent(parent, x) :   
     if parent[x] != x :
         parent[x] = find_parent(parent,parent[x])
-    return parent[x]
+    return parent[x]    #압축
 
 # 두 원소가 속한 집합을 합치기
 def union(parent, a, b) :
@@ -17,9 +17,10 @@ def union(parent, a, b) :
     else :
         parent[a] = b
 #-----------------------------------------------------------        
-v, e = map(int,input().split())
-parent = [0] * (v+1)
+v, e = map(int,input().split()) #노드,간선 입력 
+parent = [0] * (v+1) #부모테이블 생성 및 0을 초기화
 
+# 부모 테이블 상에서 자기 자신의 값으로 초기화 
 for i in range(1,v+1) :
     parent[i] = i
     
