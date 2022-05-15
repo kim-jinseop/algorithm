@@ -2,14 +2,26 @@
 # 위 링크에서 문제풀기
 
 def solution(s):    
-    length = len(s)
-        
-    for step in range(1,length//2+1) :
+    andwer = len(s)
+    result = []
+
+    for step in range(1,len(s)//2+1) :
         L_group = s[0:step]
-        for i in range(1,length,step) :
-            R_group = s[step:]
-            
+        count = 1 
+        char = ''
+
+        for i in range(step,len(s),step) :
+            R_group = s[i:i+step]
+
             if L_group == R_group :
-            
-        
-    return 
+                count += 1
+
+            else :
+                char += str(count) + L_group if count > 1 else L_group
+                L_group = s[i:i+step]
+                count = 1                        
+
+        char += str(count) + L_group if count > 1 else L_group
+        andwer = min(len(char),andwer)
+
+    return andwer
