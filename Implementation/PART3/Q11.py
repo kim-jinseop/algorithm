@@ -12,56 +12,58 @@ for _ in range(k) :
 
 # 방향 관련
 l = int(input()) #방향전환 횟수
-way_info = []
-for i in range(l) :
+info = []
+for _ in range(l) :
     x,c = input().split()
-    way_info.append((int(x),c))
+    info.append((int(x),c))
 
 # 좌상우하 
 dx = [-1,0,1,0]
 dy = [0,-1,0,1]
 
-
 def Rotation(way,direction) :
     if way == 'D' : #오른쪽 회전
-        direction += 1
-        if direction == 4 :
-            direction = 0
+        direction = (direction + 1) % 4
     elif way == 'L' :
-        direction -= 1
-        if direction == -1 :
-            direction = 4
+        direction = (direction - 1) % 4
     return direction
 
-#전진 
 def program() :
-    # 초기상태 - 내위치,방향
+    # 초기상태 - 내위치,방향 
     x,y = 1,1
-    mx,my = 1,1
     map_data[y][x] = 1
     direction = 2
     time = 0
+    index = 0
+    q = [(y,x)]
 
-    for way in way_info :
-        direction = Rotation(way[1],direction)
+    while True :
+        my = y + dy[direction] #이동 후 좌표
+        mx = x + dx[direction] #이동 후 좌표
+        time += 1
 
-        for _ in range(way[0]) :
-            my = y + dy[direction] #이동 후 좌표
-            mx = x + dx[direction] #이동 후 좌표
-
-            if my > n or my < 1 or mx > n or mx < 1 or map_data[my][mx]==2:
-                return time
-                
+        if 1 <= mx and mx <= n and 1 <= my and my <= n and map_data[my][mx] != 1:
+            x,y = mx, my
             map_data[my][mx] = 1
-            time += 1
 
             # 사과 유무 확인
             if apple_array[my][mx] == 1 :
                 apple_array[my][mx] = 0
-                map_data[y][x] = 2
+
+                q.append((my,mx))
 
             elif apple_array[my][mx] == 0 :
-                map_data[y][x] = 0
+
+                q.append((my,mx))
+                py, px = q.pop(0)
+                map_data[py][px] = 0
+            
+        else :   
+            break
+
+        if index < l and time == info[index][0] :
+            direction = Rotation(info[index][1],direction)
+            index += 1   
 
     return time
 
