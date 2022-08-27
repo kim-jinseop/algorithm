@@ -1,6 +1,6 @@
 #que를 이용한 dijkstra
 #우선순위 큐(priority Queue)
-#복습 : 1
+#복습 : 2
 
 import heapq
 import sys
