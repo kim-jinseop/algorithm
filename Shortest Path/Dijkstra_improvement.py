@@ -1,5 +1,7 @@
 #que를 이용한 dijkstra
 #우선순위 큐(priority Queue)
+#복습 : 1
+
 import heapq
 import sys
 input = sys.stdin.readline
